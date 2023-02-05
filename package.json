@@ -1,0 +1,75 @@
+{
+    "name": "@akalanka47000/scoped-test",
+    "version": "1.0.0",
+    "description": "Just a minimal package to see if scoped publishing works in free accounts",
+    "main": "dist/index.js",
+    "private": false,
+    "scripts": {
+        "build": "rimraf ./dist && npx babel src --out-dir dist",
+        "bump-version": "yarn --cwd ./node_modules/automatic-versioning/ run bump-version --name=mongoose-filter-query",
+        "deploy": "npm run build && npm publish",
+        "test": "npm run cov:clean && npm run cov:unit",
+        "cov:clean": "rimraf .nyc_output; rimraf coverage; rimraf test-results",
+        "cov:unit": "jest --coverage --forceExit --colors"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Akalanka47000/npm-scoped-package-test.git"
+    },
+    "keywords": [],
+    "author": "Akalanka Perera",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Akalanka47000/npm-scoped-package-test/issues"
+    },
+    "homepage": "https://github.com/Akalanka47000/npm-scoped-package-test#readme",
+    "devDependencies": {
+        "@babel/cli": "^7.17.10",
+        "@babel/core": "^7.18.2",
+        "@babel/preset-env": "^7.18.2",
+        "@commitlint/cli": "^17.0.1",
+        "@commitlint/config-conventional": "^17.0.0",
+        "automatic-versioning": "^1.4.9",
+        "husky": "^4.3.8",
+        "jest": "^27.5.1",
+        "rimraf": "^4.1.2"
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "post-commit": "HUSKY_SKIP_HOOKS=1 yarn bump-version"
+        }
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ],
+        "rules": {
+            "type-enum": [
+                2,
+                "always",
+                [
+                    "Feat!",
+                    "Feat",
+                    "Fix",
+                    "Build",
+                    "Refactor",
+                    "Revert",
+                    "CI",
+                    "Test",
+                    "Docs"
+                ]
+            ],
+            "type-case": [
+                0,
+                "always",
+                "pascal-case"
+            ],
+            "subject-case": [
+                0,
+                "always",
+                "pascal-case"
+            ]
+        }
+    }
+}

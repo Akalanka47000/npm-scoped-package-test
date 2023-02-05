@@ -1,0 +1,7 @@
+.idea/
+.github/
+.babelrc
+.gitignore
+jest.config.js
+src/
+test/
